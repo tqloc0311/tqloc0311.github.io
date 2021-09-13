@@ -37,20 +37,24 @@
     // undefined: web
     const dev = devQuery && devQuery != 0;
 
+    const deepLinkDev = `exp://exp.host/@sonix/schole/--/reset-password?token=${token}&email=${email}`;
+    const deepLinkProd = `schole:///reset-password/${email}`;
+
     function onLoad() {
       document.getElementById("link").innerHTML = urlWithParams;
+
+      const devTag = document.getElementById("deepLinkDev");
+      devTag.innerHTML = deepLinkDev;
+      devTag.href = deepLinkDev;
+      const prodTag = document.getElementById("deepLinkProd");
+      prodTag.innerHTML = deepLinkProd;
+      prodTag.href = deepLinkProd;
     }
 
     function linkClickedHandler() {
-      const deepLink = dev
-        ? `exp://exp.host/@sonix/schole/--/reset-password?token=${token}&email=${email}`
-        : `schole:///reset-password/${email}`;
-      //   const deepLink = dev
-      //     ? `exp://exp.host/@sonix/schole/--/reset-password?token=${token}&email=${email}`
-      //     : `schole:///reset-password?token=${token}&email=${email}`;
+      const deepLink = dev ? deepLinkDev : deepLinkProd;
 
       if (dev !== undefined) {
-        document.getElementById("deepLink").innerHTML = deepLink;
         window.location.replace(deepLink);
 
         setTimeout(function () {
@@ -70,7 +74,8 @@
       <h3>
         <a id="link" href="#" onclick="linkClickedHandler()"></a>
       </h3>
-      <h3><a id="deepLink"></a></h3>
+      <h3><a id="deepLinkDev"></a></h3>
+      <h3><a id="deepLinkProd"></a></h3>
       <h3>
         URL の有効期限は 24 時間です。<br />
         有効期限が切れた場合は最初からお手続きをお願いします。<br /><br />
