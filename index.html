@@ -60,7 +60,8 @@
       const deepLink = dev ? deepLinkDev : deepLinkProd;
 
       if (dev !== undefined) {
-        window.location.replace(deepLink);
+        // window.location.replace(deepLink);
+        window.location.href = deepLink
 
         setTimeout(function () {
           window.location.href = urlWithParams;
