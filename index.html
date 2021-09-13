@@ -58,23 +58,23 @@
 
     function linkClickedHandler() {
       const deepLink = dev ? deepLinkDev : deepLinkProd;
+      window.location.href = deepLink;
+      //   if (dev !== undefined) {
+      //     // window.location.replace(deepLink);
+      //     window.location.href = deepLink;
 
-      if (dev !== undefined) {
-        // window.location.replace(deepLink);
-        window.location.href = deepLink
-
-        setTimeout(function () {
-          window.location.href = urlWithParams;
-        }, 2000);
-      } else {
-        window.location.href = urlWithParams;
-      }
+      //     setTimeout(function () {
+      //       window.location.href = urlWithParams;
+      //     }, 2000);
+      //   } else {
+      //     window.location.href = urlWithParams;
+      //   }
     }
   </script>
 
   <body onload="onLoad()">
     <div>
-      <h1>【スコーレ】パスワード再設定のご案内</h1>
+      <h1>【スコーレ】パスワード再設定のご案内2</h1>
       <h2>こちらのURLからパスワードを再設定してください。</h2>
       <h3 id="test"></h3>
       <h3>
