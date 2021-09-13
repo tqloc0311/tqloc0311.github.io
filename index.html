@@ -37,7 +37,8 @@
     // undefined: web
     const dev = devQuery && devQuery != 0;
 
-    const deepLinkDev = `exp://exp.host/@sonix/schole/--/reset-password?token=${token}&email=${email}`;
+    // const deepLinkDev = `exp://exp.host/@sonix/schole/--/reset-password?token=${token}&email=${email}`;
+    const deepLinkDev = `exp://127.0.0.1:19000/--/reset-password?token=${token}&email=${email}`;
     const deepLinkProd = `schole:///reset-password/${email}`;
 
     function onLoad() {
