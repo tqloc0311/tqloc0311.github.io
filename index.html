@@ -1,82 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html ng-app="myApp">
   <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Schole Reset Password</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="https://unpkg.com/onsenui@1.3.17/js/onsenui.min.js"></script>
   </head>
-  <script>
-    function parseQueryString(queryString) {
-      const params = {};
-      window.location.search
-        .substr(1)
-        .split("&")
-        .forEach((item) => {
-          const query = item.split("=");
-          params[query[0]] = query[1];
-        });
-
-      return params;
-    }
-
-    const queryParams = parseQueryString(window.location.search.substr(1));
-
-    const baseURL = "http://schole-web.sonix.vn/update-password";
-    const token =
-      queryParams["token"] ??
-      "5fbcd31bb6fa1add454998cff46182b1396ffb6067de6280abb9bbfb97c48929";
-    const email = queryParams["email"] ?? "tqloc0311@gmail.com";
-    const urlWithParams = `http://schole-web.sonix.vn/update-password?token=${token}&email=${email}`;
-
-    // cần thêm param "dev": boolean | undefined vào API forget-password
-    // false: mobile development environment
-    // true: mobile production environment
-    // undefined: web
-    const dev = queryParams["dev"] && queryParams["dev"] == 1;
-
-    // format: :scheme/reset-password/:token/:email
-    // scheme:
-    //      dev: exp://exp.host/@sonix/schole/--/
-    //      prod: schole:///
-    const deepLinkDev = `exp://exp.host/@sonix/schole/--/reset-password/${token}/${email}`;
-    const deepLinkProd = `schole:///reset-password/${token}/${email}`;
-
-    function onLoad() {
-      document.getElementById("link").innerHTML = urlWithParams;
-    }
-
-    function linkClickedHandler() {
-      if (dev !== undefined) {
-        const deepLink = dev ? deepLinkDev : deepLinkProd;
-        window.location.href = deepLink;
-
-        setTimeout(function () {
-          window.location.href = urlWithParams;
-        }, 2000);
-      } else {
-        window.location.href = urlWithParams;
-      }
-    }
-  </script>
-
-  <body onload="onLoad()">
-    <div>
-      <h1>【スコーレ】パスワード再設定のご案内</h1>
-      <h2>こちらのURLからパスワードを再設定してください。</h2>
-
-      <h3>
-        <a id="link" href="#" onclick="linkClickedHandler()"></a>
-      </h3>
-
-      <h3>
-        URL の有効期限は 24 時間です。<br />
-        有効期限が切れた場合は最初からお手続きをお願いします。<br /><br />
-        ※本メールは送信専用アドレスから配信されております。<br />
-        このメールにご返信いただくことはでませんのでご注意ください。<br />
-        ※本メールに心当たりのない方はこのままメールを破棄してください。<br /><br />
-        スコーレ家庭教育振興協会
-      </h3>
+  <body>
+    <div ng-controller="BasicCtrl">
+      <select>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+        <option value="4">Four</option>
+        <option value="5">Five</option></select
+      ><select
+        ng-model="selectedOpt"
+        ng-options="opt as opt.name for opt in opts"
+      ></select>
+      <div>
+        {{'{name: ' + selectedOpt.name + ', id: ' + selectedOpt.id + '}'}}
+      </div>
     </div>
+    <script type="text/javascript">
+      var app = angular.module("myApp", []);
+      app.config(function () {});
+      app.controller("BasicCtrl", function ($scope) {
+        $scope.opts = [
+          { id: 1, name: "A" },
+          { id: 2, name: "B" },
+          { id: 3, name: "C" },
+          { id: 4, name: "D" },
+          { id: 5, name: "E" },
+          { id: 6, name: "F" },
+        ];
+      });
+    </script>
   </body>
 </html>
